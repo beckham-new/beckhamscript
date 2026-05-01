@@ -19,26 +19,33 @@
     backface-visibility: hidden;
 }
 
+html {
+    /* Memastikan koordinat background dihitung dari seluruh dokumen */
+    height: -webkit-fill-available; 
+}
+
 body {
     margin: 0;
     padding: 0;
-    color: var(--persian-orange);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    /* Gunakan min-height dvh (dynamic viewport height) agar fit dengan toolbar browser HP */
+    width: 100%;
+    /* Gunakan min-height, bukan height fixed, agar background mengikuti konten yang memanjang */
+    min-height: 100vh; 
     min-height: 100dvh; 
+
+    /* Pengaturan Background */
     background: 
         linear-gradient(
             180deg, 
-            rgba(37, 18, 17, 0.9) 0%,   
-            rgba(45, 36, 53, 0.75) 50%,  
-            rgba(53, 59, 86, 0.9) 100%  
+            rgba(37, 18, 17, 0.95) 0%,   
+            rgba(45, 36, 53, 0.85) 50%,  
+            rgba(53, 59, 86, 0.95) 100%  
         ),
-        url('assets/images/background-berdua.png'); 
-    background-attachment: scroll; /* UBAH: fixed di HP bikin sangat lag, gunakan scroll */
+        url('assets/images/background-berdua.png');
+    
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: center top; /* Pastikan posisi mulai dari atas */
+    background-repeat: repeat-y; /* Jika foto tidak cukup panjang, dia akan mengulang ke bawah */
+    background-attachment: scroll; /* Sangat penting untuk Mobile agar tidak putih di bawah */
 }
 
 /* Khusus Desktop tetap boleh fixed */
