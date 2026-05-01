@@ -51,7 +51,7 @@ h1 {
 
 h2 { 
     font-family: 'Playfair Display'; 
-    font-size: 1.5rem; 
+    font-size: 1rem; 
     color: var(--earth-yellow); 
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(251, 180, 94, 0.2);
