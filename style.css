@@ -1,0 +1,967 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --delft-blue: #353B56;
+    --taupe-gray: #7D7585;
+    --earth-yellow: #FBB45E;
+    --persian-orange: #C99379;
+    --licorice: #251211;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--persian-orange);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    /* Gradasi dibuat sedikit lebih gelap agar rasi bintang lebih menonjol */
+    background: 
+        linear-gradient(
+            180deg, 
+            rgba(37, 18, 17, 0.9) 0%,   
+            rgba(45, 36, 53, 0.75) 50%,  
+            rgba(53, 59, 86, 0.9) 100%  
+        ),
+        url('assets/images/background-berdua.png'); 
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- Typography & Branding --- */
+
+h1 { 
+    font-family: 'Playfair Display'; 
+    font-size: 3.5rem; 
+    color: var(--earth-yellow); 
+    letter-spacing: 5px; 
+    text-shadow: 0 0 20px rgba(251, 180, 94, 0.4);
+}
+
+.subtitle, .nebula-msg, .letter-box p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--persian-orange);
+    letter-spacing: 1px;
+}
+
+h2 { 
+    font-family: 'Playfair Display'; 
+    font-size: 2.5rem; 
+    color: var(--earth-yellow); 
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(251, 180, 94, 0.2);
+}
+
+/* --- Stars Background --- */
+
+#star-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    transition: transform 0.2s ease-out; /* Smooth parallax */
+}
+
+.star { 
+    position: absolute; 
+    border-radius: 50%; 
+    filter: blur(0.3px);
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+/* --- Layout Sections --- */
+
+section {
+    min-height: 100vh;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* --- Photo Timeline Styling --- */
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 1000px;
+}
+
+.timeline-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 60px; 
+    width: 100%;
+}
+
+.timeline-item.reverse { flex-direction: row-reverse; }
+
+/* Frame Foto Mewah */
+.planet-frame {
+    width: 380px;   
+    height: 240px;  
+    border-radius: 20px; 
+    border: 2px solid var(--earth-yellow);
+    object-fit: cover; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: var(--licorice);
+}
+
+.planet-frame:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 20px 50px rgba(251, 180, 94, 0.25);
+    border-color: #fff;
+}
+
+.timeline-text { 
+    background: rgba(37, 18, 17, 0.75); 
+    padding: 35px; 
+    border-radius: 25px; 
+    border: 1px solid rgba(251, 180, 94, 0.2); 
+    max-width: 420px;
+    backdrop-filter: blur(15px);
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.timeline-text h3 {
+    font-family: 'Playfair Display';
+    color: var(--earth-yellow);
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.timeline-text p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #fcece0;
+}
+
+/* --- Interactive Traits & Nav --- */
+
+.trait-planet { 
+    width: 120px; 
+    height: 120px; 
+    background: rgba(53, 59, 86, 0.6); 
+    border: 1px solid var(--earth-yellow); 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+}
+
+.trait-planet:hover { 
+    transform: translateY(-15px); 
+    box-shadow: 0 0 30px var(--earth-yellow);
+    background: rgba(251, 180, 94, 0.3);
+}
+
+/* --- Letter & Footer --- */
+
+.letter-box {
+    background: rgba(37, 18, 17, 0.5);
+    padding: 60px;
+    border-radius: 40px;
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(251, 180, 94, 0.15);
+    max-width: 750px;
+}
+
+footer { 
+    background: rgba(21, 10, 9, 0.98); 
+    padding: 100px 20px; 
+    border-top: 1px solid rgba(251, 180, 94, 0.1);
+}
+
+.footer-img { 
+    width: 160px; 
+    height: 160px; 
+    border-radius: 50%; 
+    border: 3px solid var(--earth-yellow); 
+    margin-bottom: 30px; 
+    transition: 0.5s;
+}
+
+.footer-img:hover { transform: rotate(5deg) scale(1.05); }
+
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.2rem; }
+    .timeline-item, .timeline-item.reverse { flex-direction: column; gap: 30px; }
+    .planet-frame { width: 100%; max-width: 320px; height: 200px; }
+    .timeline-text { text-align: center; padding: 25px; }
+    .side-nav { display: none; }
+}
+
+/* --- Keyframes --- */
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* --- CSS Khusus Chat Room Section --- */
+
+#constellation {
+    /* Hapus warna background agar tidak ada garis potong */
+    background: transparent; 
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#constellation h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--earth-yellow);
+    text-shadow: 0 0 15px rgba(251, 180, 94, 0.5);
+}
+
+/* Pastikan container chat-nya yang punya efek kaca, bukan section-nya */
+.chat-room-container {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.05); /* Sangat tipis agar bintang tetap kelihatan */
+    border: 1px solid rgba(251, 180, 94, 0.2);
+    border-radius: 30px;
+    backdrop-filter: blur(15px); /* Efek blur kaca */
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+/* Header Aplikasi Chat */
+.chat-header {
+    background: rgba(37, 18, 17, 0.8);
+    padding: 20px;
+    border-bottom: 1px solid rgba(251, 180, 94, 0.1);
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.header-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid var(--earth-yellow);
+    object-fit: cover;
+}
+
+.header-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--earth-yellow);
+    font-size: 1.4rem;
+}
+
+.header-info .status {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* Area Pesan */
+.chat-messages {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.message-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Profil Avatar di Samping Bubble */
+.msg-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    flex-shrink: 0; /* Avatar tidak mengecil */
+}
+
+.bubble-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+}
+
+/* Bubble Messages General */
+/* Update font di dalam bubble chat */
+.bubble {
+    padding: 15px 20px;
+    border-radius: 20px;
+    position: relative;
+    /* Ganti ke Inter agar lebih bersih dan mudah dibaca */
+    font-family: 'Inter', sans-serif; 
+    font-size: 1rem; /* Ukuran font chat standar lebih kecil agar rapi */
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+}
+
+/* Khusus untuk pesan yang ingin lebih puitis, bisa pakai Playfair Display */
+.bubble p { 
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+/* Nama di Header Chat */
+.header-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--earth-yellow);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Status "Online" atau tanggal */
+.header-info .status {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Jam di pojok chat */
+.bubble .time {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    opacity: 0.5;
+    margin-top: 4px;
+}
+
+/* PESAN KHADAFI (Kiri) - Warna Putih/Abu Transparan */
+.message-row.admin-msg { justify-content: flex-start; }
+
+.bubble.admin {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border-bottom-left-radius: 4px; /* Ekor chat */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.bubble.admin .time { color: white; text-align: left; }
+
+/* PESAN RAPH (Kanan) - Warna Emas Transparan */
+.message-row.user-msg { justify-content: flex-end; }
+
+.bubble.user {
+    background: rgba(251, 180, 94, 0.15);
+    color: var(--earth-yellow);
+    border-bottom-right-radius: 4px; /* Ekor chat */
+    border: 1px solid rgba(251, 180, 94, 0.2);
+    text-align: right;
+}
+
+.bubble.user .time { color: var(--earth-yellow); text-align: right; }
+
+/* Foto di Dalam Chat */
+.chat-image {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid rgba(251, 180, 94, 0.3);
+    transition: 0.3s;
+}
+
+.chat-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(251, 180, 94, 0.3);
+}
+
+/* Responsif Mobile untuk Chat */
+@media (max-width: 768px) {
+    .chat-messages { padding: 15px; gap: 15px; }
+    .msg-avatar { width: 35px; height: 35px; }
+    .bubble { font-size: 1.1rem; padding: 10px 15px; }
+    .header-avatar { width: 45px; height: 45px; }
+    .header-info h3 { font-size: 1.2rem; }
+}
+
+/* --- UPDATE: COSMIC MOMENT (TRANSPARAN & KILAT) --- */
+
+#cosmic-moment {
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.moment-container {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.photo-frame {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03); /* Frame sangat transparan */
+    padding: 12px;
+    border-radius: 40px;
+    border: 1px solid rgba(251, 180, 94, 0.15); /* Garis halus transparan */
+    backdrop-filter: blur(5px); /* Blur kaca tipis agar tidak ganggu foto */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    width: fit-content;
+}
+
+.main-photo {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 30px;
+    display: block;
+    filter: brightness(0.95);
+    transition: 0.5s ease;
+}
+
+.photo-frame:hover .main-photo {
+    filter: brightness(1);
+    transform: scale(1.01);
+}
+
+/* Style Bar Kata-kata (Kilat & Transparan) */
+.caption-bar {
+    position: absolute;
+    padding: 15px 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 10;
+    opacity: 0; 
+    animation: quickFadeIn 0.4s ease-out forwards; /* Animasi dipercepat ke 0.4s */
+}
+
+@keyframes quickFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px) scale(0.95); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.khadafi-bar {
+    top: 15%;
+    left: -40px; 
+    background: rgba(255, 255, 255, 0.08); /* Bening */
+    border-left: 4px solid rgba(255, 255, 255, 0.8);
+    animation-delay: 0.2s; /* Muncul hampir instan */
+}
+
+.raph-bar {
+    bottom: 15%;
+    right: -40px;
+    background: rgba(251, 180, 94, 0.08); /* Bening */
+    border-right: 4px solid var(--earth-yellow);
+    text-align: right;
+    animation-delay: 0.5s; /* Muncul secepatnya setelah Khadafi */
+}
+
+.caption-bar .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    opacity: 0.6;
+    color: #fff;
+}
+
+/* Style Bar Kata-kata (Kilat & Transparan) */
+.caption-bar {
+    position: absolute;
+    padding: 15px 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 10;
+    opacity: 0; 
+    animation: quickFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes quickFadeIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.khadafi-bar {
+    top: 15%;
+    left: -40px; 
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid rgba(255, 255, 255, 0.8);
+    animation-delay: 0.2s;
+    /* Kunci Rata Kiri */
+    align-items: flex-start; 
+    text-align: left;
+}
+
+.raph-bar {
+    bottom: 15%;
+    right: -40px;
+    background: rgba(251, 180, 94, 0.08);
+    border-right: 4px solid var(--earth-yellow);
+    animation-delay: 0.5s;
+    /* Kunci Rata Kanan */
+    align-items: flex-end; 
+    text-align: right;
+}
+
+.caption-bar .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    opacity: 0.6;
+    color: #fff;
+}
+
+.caption-bar p {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    width: 100%; /* Memastikan teks mengambil ruang penuh untuk rata kiri/kanan */
+}
+
+/* Responsif Mobile - Keseimbangan Kiri & Kanan */
+@media (max-width: 768px) {
+    .moment-container {
+        max-width: 320px;
+        margin: 50px auto;
+    }
+
+    .photo-frame {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .caption-bar {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+        width: 90%;
+        padding: 15px 20px;
+    }
+
+    .khadafi-bar {
+        top: -35px;
+        align-items: flex-start !important; /* Paksa isi ke kiri di HP */
+        text-align: left !important;
+        border-left: 4px solid #fff;
+        border-top: none;
+    }
+
+    .khadafi-bar p {
+        text-align: left !important;
+    }
+
+    .raph-bar {
+        bottom: -35px;
+        align-items: flex-end !important; /* Paksa isi ke kanan di HP */
+        text-align: right !important;
+        border-right: 4px solid var(--earth-yellow);
+        border-bottom: none;
+    }
+
+    .raph-bar p {
+        text-align: right !important;
+    }
+}
+
+#constellation-path {
+    min-height: 100vh; /* Lebih tinggi agar scroll terasa */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 100px 0; /* Beri ruang napas atas bawah */
+}
+
+.constellation-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+.constellation-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.constellation-svg line {
+    stroke: var(--earth-yellow);
+    stroke-width: 1.5;
+    opacity: 0.4;
+    stroke-dasharray: 5; /* Membuat garis putus-putus estetik */
+    animation: lineFlow 5s linear infinite;
+}
+
+@keyframes lineFlow {
+    to { stroke-dashoffset: 50; }
+}
+
+.star-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* Star Glow & Star Label tetap menggunakan kode sebelumnya */
+.star-glow {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    box-shadow: 0 0 20px var(--earth-yellow);
+    animation: starPulse 3s infinite ease-in-out;
+}
+
+.star-node:hover .star-glow {
+    transform: scale(1.4) rotate(144deg); /* Berputar saat di-hover */
+    background: var(--earth-yellow);
+    box-shadow: 0 0 40px 15px #fff;
+}
+
+/* Animasi agar bintang tidak kaku (berdenyut dan goyang halus) */
+@keyframes starPulse {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        filter: brightness(1) drop-shadow(0 0 5px var(--earth-yellow));
+    }
+    50% { 
+        transform: scale(1.15) rotate(5deg); 
+        filter: brightness(1.3) drop-shadow(0 0 15px #fff);
+    }
+}
+
+/* Menghaluskan garis penghubung agar tidak kaku */
+.main-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px; /* Lebih tipis agar elegan */
+    height: 100%;
+    background: linear-gradient(
+        to bottom, 
+        transparent, 
+        rgba(251, 180, 94, 0.2) 10%, 
+        var(--earth-yellow) 50%, 
+        rgba(251, 180, 94, 0.2) 90%, 
+        transparent
+    );
+    opacity: 0.6;
+}
+
+.star-label {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    color: var(--earth-yellow);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+}
+
+/* Overlay Styling */
+/* Overlay Surat Premium */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Background gelap transparan */
+    backdrop-filter: blur(15px) saturate(150%); /* Blur kaca yang manis */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.letter-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 60px 40px;
+    border-radius: 60px 20px 60px 20px; /* Bentuk asimetris elegan */
+    border: 1px solid rgba(251, 180, 94, 0.3);
+    max-width: 650px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(251, 180, 94, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek Mengetik */
+#letter-text {
+    font-family: 'Dancing Script', cursive; /* Lebih manis */
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: #fff;
+    min-height: 100px; /* Jaga layout tetap stabil saat mengetik */
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Kursor Ketik */
+#letter-text::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+    margin-left: 5px;
+    color: var(--earth-yellow);
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--earth-yellow);
+    border: 1px solid var(--earth-yellow);
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.back-btn:hover {
+    background: var(--earth-yellow);
+    color: var(--licorice);
+    box-shadow: 0 0 20px var(--earth-yellow);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#time-odyssey {
+    padding: 100px 20px;
+    background: transparent;
+}
+
+.timer-wrapper {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.clock-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.clock-circle {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 3px solid var(--earth-yellow);
+    box-shadow: 0 0 30px rgba(251, 180, 94, 0.3);
+    overflow: hidden; /* Foto tetap di dalam lingkaran */
+    background: var(--licorice);
+}
+
+.clock-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Membuat foto sedikit gelap agar jarum jam terlihat */
+    transition: 0.5s;
+}
+
+.clock-circle:hover .clock-image {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+/* Jarum Jam Analog */
+.clock-hands {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%; left: 50%;
+    background: #fff;
+    transform-origin: bottom;
+    border-radius: 10px;
+}
+
+.hour { width: 4px; height: 50px; z-index: 3; }
+.minute { width: 3px; height: 75px; z-index: 2; opacity: 0.8; }
+.second { width: 1.5px; height: 90px; background: var(--earth-yellow); z-index: 1; }
+
+/* Digital Counter */
+.digital-counter {
+    display: flex;
+    gap: 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px 40px;
+    border-radius: 30px;
+    border: 1px solid rgba(251, 180, 94, 0.2);
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Update Font Nomor Counter --- */
+
+.time-unit span {
+    /* Menggunakan Playfair Display agar angka terlihat mewah dan artistik */
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; /* Ukuran diperbesar sedikit agar lebih dominan */
+    font-weight: 700;
+    color: var(--earth-yellow); /* Menggunakan warna emas rasi bintangmu */
+    text-shadow: 0 0 15px rgba(251, 180, 94, 0.4); /* Efek glow halus pada angka */
+    line-height: 1;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Responsif untuk HP agar angka tidak terlalu besar dan bertumpuk */
+@media (max-width: 768px) {
+    .time-unit span {
+        font-size: 2.2rem;
+    }
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* --- Update CSS untuk Efek Mengetik yang Manis --- */
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Jarak lebih rapat agar terasa seperti chat */
+    width: 90%;
+    max-width: 400px; /* Lebih ramping agar estetik */
+}
+
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.khadafi-wrapper { align-items: flex-start; }
+.raph-wrapper { align-items: flex-end; }
+
+/* Font Manis untuk Indikator "Is Typing..." */
+.typing-indicator {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--earth-yellow);
+    opacity: 0.8;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    animation: typingBlink 1s infinite;
+}
+
+.raph-wrapper .typing-indicator {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+/* Update Font Isi Chat (Agar Mudah Dibaca) */
+.chat-bubble p {
+    font-family: 'Inter', sans-serif; /* Tetap Inter agar Raph nyaman membaca */
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0;
+}
+
+/* Animasi Berkedip Manis untuk "Typing..." */
+@keyframes typingBlink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Chat Bubble Styling (Sedikit Penyesuaian) */
+.chat-bubble {
+    padding: 12px 18px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(251, 180, 94, 0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    max-width: 85%;
+    animation: bubblePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
